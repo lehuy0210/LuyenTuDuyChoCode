@@ -1,7 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdexcept>
+#include <ctime>
 using namespace std;
+
+// Forward declaration
+void GhiLog(string noidung);
 
 struct Sach
 {
@@ -9,18 +15,26 @@ struct Sach
 	string tenDocGia;
 	int soLuongSach;
 };
-
 struct PhieuMuon
 {
 	string thoiGianMuon;
 	string thoiGianTra;
 };
-
 void DocFileDanhSachSach(Sach* dsSach, int& dem)
 {
-	ifstream inFile("DanhSachSach.txt");
-	if (inFile.is_open())
-	{
+	try {
+		ifstream inFile("DanhSachSach.txt");
+		// Neu khong tim thay o thu muc hien tai, thu tim o thu muc cha
+		if (!inFile.is_open())
+		{
+			inFile.open("../DanhSachSach.txt");
+		}
+		if (!inFile.is_open())
+		{
+			throw runtime_error("Khong the mo file DanhSachSach.txt de doc!");
+
+		}
+		
 		dem = 0;
 		string line;
 		while (getline(inFile, line))
@@ -53,18 +67,27 @@ void DocFileDanhSachSach(Sach* dsSach, int& dem)
 			}
 			dsSach[dem].tenSach = tenSach;
 			dsSach[dem].tenDocGia = tenDocgia;
-			dsSach[dem].soLuongSach = stoi(soLuong);
+			try {
+				dsSach[dem].soLuongSach = stoi(soLuong);
+			}
+			catch (exception& e)
+			{
+				dsSach[dem].soLuongSach = 0;
+				GhiLog("Loi chuyen doi so luong sach cho: " + tenSach);
+			}
 			dem++;
 		}
 		inFile.close();
+		GhiLog("Doc file DanhSachSach.txt thanh cong.");
 	}
-	else
+	catch (exception& e)
 	{
-		cout << "Khong the mo file DachSachSach.txt de doc!" << endl;
+		cout << "Loi: " << e.what() << endl;
+		GhiLog("Loi doc file: " + string(e.what()));
 	}
 }
 
-void LuaChon(Sach* dsSach, PhieuMuon* dsPhieuMuon, int dem, string& luachon, int& soluongchon, bool& daluachon)
+void LuaChon(Sach* dsSach, PhieuMuon* dsPhieuMuon, int dem, string& luachon, int& soluongchon, bool& daluachon, string& tenSachDaChon)
 {
 	string tenSachChon;
 	string tenDocGiaChon;
@@ -72,128 +95,188 @@ void LuaChon(Sach* dsSach, PhieuMuon* dsPhieuMuon, int dem, string& luachon, int
 	cout << "Tim sach theo ten sach hay la theo ten doc gia?" << endl;
 	cout << "Vui long nhap tensach hoac docgia de chon: ";
 	cin >> luachon;
-
-	if (luachon == "tensach")
-	{
-		for (int i = 0; i < dem; i++)
+	try {
+		if (luachon == "tensach")
 		{
-			cout << dsSach[i].tenSach << "," << dsSach[i].tenDocGia << "," << dsSach[i].soLuongSach;
-			cout << endl;
-		}
-		cout << "Chon ten sach: ";
-		cin >> tenSachChon;
-		for (int i = 0; i < dem; i++)
-		{
-			if (tenSachChon == dsSach[i].tenSach)
-			{
-				soluongsach = dsSach[i].soLuongSach;
-				break;  
-			}
-		}
-		do {
-			cout << "Chon so luong muon muon: ";
-			cin >> soluongchon;
-			if (soluongchon > soluongsach)
-			{
-				cout << "Nhap hon so luong sach hien co ! Vui long nhap lai!";
-				cout << endl;
-			}
-		} while (soluongchon > soluongsach);
-		cout << "Nhap ngay muon (dd/mm/yyyy): ";
-		cin >> dsPhieuMuon->thoiGianMuon;
-		cout << "Nhap ngay tra (dd/mm/yyyy): ";
-		cin >> dsPhieuMuon->thoiGianTra;
-		daluachon = true;
-	}
-	else if (luachon == "docgia")
-	{
-		cout << "Nhap ten doc gia: ";
-		cin >> tenDocGiaChon;
-		for (int i = 0; i < dem; i++)
-		{
-			if (tenDocGiaChon == dsSach[i].tenDocGia)
+			cout << "Danh sach sach:" << endl;
+			for (int i = 0; i < dem; i++)
 			{
 				cout << dsSach[i].tenSach << "," << dsSach[i].tenDocGia << "," << dsSach[i].soLuongSach;
 				cout << endl;
 			}
+			cout << "Chon ten sach: ";
+			cin >> tenSachChon;
+			tenSachDaChon = tenSachChon;
+			for (int i = 0; i < dem; i++)
+			{
+				if (tenSachChon == dsSach[i].tenSach)
+				{
+					soluongsach = dsSach[i].soLuongSach;
+					break;
+				}
+			}
+			do {
+				cout << "Chon so luong muon muon: ";
+				cin >> soluongchon;
+				if (soluongchon > soluongsach)
+				{
+					cout << "Nhap hon so luong sach hien co ! Vui long nhap lai!";
+					cout << endl;
+				}
+			} while (soluongchon > soluongsach);
+			cout << "Nhap ngay muon (dd/mm/yyyy): ";
+			cin >> dsPhieuMuon->thoiGianMuon;
+			cout << "Nhap ngay tra (dd/mm/yyyy): ";
+			cin >> dsPhieuMuon->thoiGianTra;
+			daluachon = true;
+			GhiLog("User chon muon sach: " + tenSachChon + ", ngay muon: " + dsPhieuMuon->thoiGianMuon + ", ngay tra: " + dsPhieuMuon->thoiGianTra);
 		}
-		cout << "Nhap ten sach: ";
-		cin >> tenSachChon;
-		for (int i = 0; i < dem; i++)
+		else if (luachon == "docgia")
 		{
-			if (tenSachChon == dsSach[i].tenSach)
+			// Hien thi danh sach doc gia (khong trung lap)
+			cout << "Danh sach doc gia:" << endl;
+			for (int i = 0; i < dem; i++)
 			{
-				soluongsach = dsSach[i].soLuongSach;
-				break;
+				// Kiem tra xem doc gia nay da hien thi chua
+				bool daTonTai = false;
+				for (int j = 0; j < i; j++)
+				{
+					if (dsSach[i].tenDocGia == dsSach[j].tenDocGia)
+					{
+						daTonTai = true;
+						break;
+					}
+				}
+				if (!daTonTai)
+				{
+					cout << dsSach[i].tenDocGia << endl;
+				}
 			}
+			
+			cout << "Nhap ten doc gia: ";
+			cin >> tenDocGiaChon;
+			
+			// Hien thi sach cua doc gia da chon
+			cout << "Sach cua doc gia " << tenDocGiaChon << ":" << endl;
+			for (int i = 0; i < dem; i++)
+			{
+				if (tenDocGiaChon == dsSach[i].tenDocGia)
+				{
+					cout << dsSach[i].tenSach << "," << dsSach[i].tenDocGia << "," << dsSach[i].soLuongSach;
+					cout << endl;
+				}
+			}
+			cout << "Nhap ten sach: ";
+			cin >> tenSachChon;
+			tenSachDaChon = tenSachChon;
+			for (int i = 0; i < dem; i++)
+			{
+				if (tenSachChon == dsSach[i].tenSach)
+				{
+					soluongsach = dsSach[i].soLuongSach;
+					break;
+				}
+			}
+			do {
+				cout << "Chon so luong muon muon: ";
+				cin >> soluongchon;
+				if (soluongchon > soluongsach)
+				{
+					cout << "Nhap hon so luong sach hien co ! Vui long nhap lai!";
+					cout << endl;
+				}
+			} while (soluongchon > soluongsach);
+			cout << "Nhap ngay muon (dd/mm/yyyy): ";
+			cin >> dsPhieuMuon->thoiGianMuon;
+			cout << "Nhap ngay tra (dd/mm/yyyy): ";
+			cin >> dsPhieuMuon->thoiGianTra;
+			daluachon = true;
+			GhiLog("User chon muon sach theo doc gia: " + tenDocGiaChon + ", sach: " + tenSachChon + ", ngay muon: " + dsPhieuMuon->thoiGianMuon + ", ngay tra: " + dsPhieuMuon->thoiGianTra);
 		}
-		do {
-			cout << "Chon so luong muon muon: ";
-			cin >> soluongchon;
-			if (soluongchon > soluongsach)
-			{
-				cout << "Nhap hon so luong sach hien co ! Vui long nhap lai!";
-				cout << endl;
-			}
-		} while (soluongchon > soluongsach);
-		cout << "Nhap ngay muon (dd/mm/yyyy): ";
-		cin >> dsPhieuMuon->thoiGianMuon;
-		cout << "Nhap ngay tra (dd/mm/yyyy): ";
-		cin >> dsPhieuMuon->thoiGianTra;
-		daluachon = true;
+		else
+		{
+			GhiLog("User nhap lua chon khong hop le: " + luachon);
+		}
+	}
+	catch (exception& e)
+	{
+		cout << "Loi: " << e.what() << endl;
+		GhiLog("Loi trong qua trinh lua chon: " + string(e.what()));
 	}
 }
 
 void InFilePhieuMuon(PhieuMuon* dsPhieuMuon)
 {
-	ofstream outFile("PhieuMuon.txt", ios::app);
-	if (outFile.is_open())
-	{
+	try {
+		ofstream outFile("PhieuMuon.txt", ios::app);
+		if (!outFile.is_open())
+		{
+			throw runtime_error("Khong the mo file PhieuMuon.txt de ghi!");
+		}
 		outFile << dsPhieuMuon->thoiGianMuon << " " << dsPhieuMuon->thoiGianTra << endl; 
 		outFile.close();
+		GhiLog("Ghi phieu muon thanh cong: " + dsPhieuMuon->thoiGianMuon + " - " + dsPhieuMuon->thoiGianTra);
 	}
-	else
+	catch (exception& e)
 	{
-		cout << "Khong the mo file PhieuMuon.txt de ghi!" << endl;
+		cout << "Loi: " << e.what() << endl;
+		GhiLog("Loi ghi file PhieuMuon: " + string(e.what()));
 	}
 }
 
-void XuLySoLuongSach(Sach* dsSach, int dem, string luachon, int soluongchon, bool daluachon)
+void XuLySoLuongSach(Sach* dsSach, int dem, string tenSachDaChon, int soluongchon, bool daluachon)
 {
 	if (daluachon == true)
 	{
+		// Chi giam so luong cua sach duoc chon
 		for (int i = 0; i < dem; i++)
 		{
-			dsSach[i].soLuongSach = dsSach[i].soLuongSach - soluongchon;
+			if (dsSach[i].tenSach == tenSachDaChon)
+			{
+				dsSach[i].soLuongSach = dsSach[i].soLuongSach - soluongchon;
+				GhiLog("Cap nhat so luong sach sau khi muon: " + tenSachDaChon);
+				break;
+			}
 		}
 	}
-	ofstream outFile("DanhSachSach.txt", ios::out);
-	if (outFile.is_open())
-	{
+	
+	try {
+		ofstream outFile("DanhSachSach.txt", ios::out);
+		if (!outFile.is_open())
+		{
+			throw runtime_error("Khong the mo file DanhSachSach.txt de ghi!");
+		}
 		for (int i = 0; i < dem; i++)
 		{
 			outFile << dsSach[i].tenSach << "," << dsSach[i].tenDocGia << "," << dsSach[i].soLuongSach << endl;
 		}
 		outFile.close();
+		GhiLog("Cap nhat file DanhSachSach.txt thanh cong.");
 	}
-	else
+	catch (exception& e)
 	{
-		cout << "Khong the mo file DanhSachSach.txt de ghi!" << endl;
+		cout << "Loi: " << e.what() << endl;
+		GhiLog("Loi ghi file DanhSachSach: " + string(e.what()));
 	}
 }
-
+void ThoiGianHienTai(int& ngay, int& thang, int& nam)
+{
+	time_t thoigianhientai = time(0);
+	tm* thoigianhientaidocduoc = localtime(&thoigianhientai);
+	ngay = thoigianhientaidocduoc->tm_mday;
+	thang = thoigianhientaidocduoc->tm_mon + 1;
+	nam = thoigianhientaidocduoc->tm_year + 1900;
+}
 void TinhQuaHanPhieuMuon(PhieuMuon* dsPhieuMuon)
 {
-	int ngayhientai = 12;        
-	int thanghientai = 11;       
-	int namhientai = 2025;      
 	bool kiemtraquathoihan = false;
 	string thoigiantra = dsPhieuMuon->thoiGianTra;
 	string ngaytra = "";
 	string thangtra = "";
 	string namtra = "";
 	int phantra = 0;
-
+	int ngayhientai, thanghientai, namhientai;
+	ThoiGianHienTai(ngayhientai, thanghientai, namhientai);
 	for (int i = 0; i < thoigiantra.length(); i++)
 	{
 		if (thoigiantra[i] == '/' || thoigiantra[i] == '-')
@@ -216,11 +299,21 @@ void TinhQuaHanPhieuMuon(PhieuMuon* dsPhieuMuon)
 			}
 		}
 	}
-
-	int intNgayTra = stoi(ngaytra);
-	int intThangTra = stoi(thangtra);
-	int intNamTra = stoi(namtra);
-
+	int intNgayTra = 0;
+	int intThangTra = 0;
+	int intNamTra = 0;
+	try {
+		intNgayTra = stoi(ngaytra);
+		intThangTra = stoi(thangtra);
+		intNamTra = stoi(namtra);
+	}
+	catch (exception& e)
+	{
+		intNgayTra = 0;
+		intThangTra = 0;
+		intNamTra = 0;
+		GhiLog("Loi chuyen doi ngay tra: " + string(e.what()));
+	}
 	if (intNamTra < namhientai)
 	{
 		kiemtraquathoihan = true;
@@ -239,33 +332,72 @@ void TinhQuaHanPhieuMuon(PhieuMuon* dsPhieuMuon)
 			}
 		}
 	}
-
 	if (kiemtraquathoihan)
 	{
 		cout << "Nguoi muon QUA HAN tra sach";
 		cout << endl;
+		GhiLog("PHAT HIEN QUA HAN: Ngay tra du kien: " + dsPhieuMuon->thoiGianTra);
 	}
 	else
 	{
 		cout << "Nguoi muon chua qua han hoac tra dung han";
 		cout << endl;
+		GhiLog("Kiem tra han tra: Chua qua han. Ngay tra du kien: " + dsPhieuMuon->thoiGianTra);
 	}
 }
-
+void GhiLog(string noidung)
+{
+	try {
+		ofstream logFile("log.txt", ios::app);
+		if (!logFile.is_open())
+		{
+			throw runtime_error("Khong the mo file log.txt de ghi!");
+		}
+		// Ghi timestamp va noi dung
+		time_t thoigianhientai = time(0);
+		tm* thoigianhientaidocduoc = localtime(&thoigianhientai);
+		logFile << "[" << thoigianhientaidocduoc->tm_mday << "/" 
+		        << (thoigianhientaidocduoc->tm_mon + 1) << "/" 
+		        << (thoigianhientaidocduoc->tm_year + 1900) << " " 
+		        << thoigianhientaidocduoc->tm_hour << ":" 
+		        << thoigianhientaidocduoc->tm_min << ":" 
+		        << thoigianhientaidocduoc->tm_sec << "] " 
+		        << noidung << endl;
+		logFile.close();
+	}
+	catch (exception& e)
+	{
+		cout << "Loi ghi log: " << e.what() << endl;
+	}
+}
 int main()
 {
+	GhiLog("=== BAT DAU CHUONG TRINH ===");
+	
 	string luachon;
 	int soluongchon = 0; 
 	bool daluachon = false;
-	int dem = 100;
+	string tenSachDaChon = "";
+	int dem = 0;  // Khoi tao = 0, se duoc cap nhat sau khi doc file
+	int maxSach = 100;  // So luong toi da
 	Sach* dsSach;
 	PhieuMuon* dsPhieuMuon;
-	dsSach = new Sach[dem];
+	dsSach = new Sach[maxSach];
 	dsPhieuMuon = new PhieuMuon;
 
 	DocFileDanhSachSach(dsSach, dem);
-	LuaChon(dsSach, dsPhieuMuon, dem, luachon, soluongchon, daluachon);
-	XuLySoLuongSach(dsSach, dem, luachon, soluongchon, daluachon);
+	
+	if (dem == 0)
+	{
+		cout << "Khong co sach nao trong he thong!" << endl;
+		GhiLog("Khong co sach nao de muon.");
+		delete[] dsSach;
+		delete dsPhieuMuon;
+		return 0;
+	}
+	
+	LuaChon(dsSach, dsPhieuMuon, dem, luachon, soluongchon, daluachon, tenSachDaChon);
+	XuLySoLuongSach(dsSach, dem, tenSachDaChon, soluongchon, daluachon);
 	TinhQuaHanPhieuMuon(dsPhieuMuon);
 	InFilePhieuMuon(dsPhieuMuon);
 
@@ -274,5 +406,7 @@ int main()
 	dsSach = nullptr;
 	dsPhieuMuon = nullptr;
 
+	GhiLog("=== KET THUC CHUONG TRINH ===");
+	
 	return 0;
 }

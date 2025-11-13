@@ -1,0 +1,37 @@
+[13/11/2025 14:26:12] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:26:12] Loi doc file: Khong the mo file DanhSachSach.txt de doc!
+[13/11/2025 14:26:41] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:26:41] Loi doc file: Khong the mo file DanhSachSach.txt de doc!
+[13/11/2025 14:26:46] User chon muon sach: sa, ngay muon: , ngay tra: 
+[13/11/2025 14:26:46] Cap nhat so luong sach sau khi muon.
+[13/11/2025 14:26:46] Cap nhat file DanhSachSach.txt thanh cong.
+[13/11/2025 14:26:46] Loi chuyen doi ngay tra: invalid stoi argument
+[13/11/2025 14:26:46] PHAT HIEN QUA HAN: Ngay tra du kien: 
+[13/11/2025 14:26:46] Ghi phieu muon thanh cong:  - 
+[13/11/2025 14:26:46] === KET THUC CHUONG TRINH ===
+[13/11/2025 14:29:2] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:29:2] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:31:12] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:31:12] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:33:54] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:33:54] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:34:18] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:34:18] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:35:15] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:35:15] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:35:34] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:35:34] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:35:48] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:35:48] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:36:28] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:36:28] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:36:36] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:36:36] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:38:53] === BAT DAU CHUONG TRINH ===
+[13/11/2025 14:38:53] Doc file DanhSachSach.txt thanh cong.
+[13/11/2025 14:39:23] User chon muon sach: LapTrinhC++, ngay muon: 02/10/2025, ngay tra: 10/11/2025
+[13/11/2025 14:39:23] Cap nhat so luong sach sau khi muon: LapTrinhC++
+[13/11/2025 14:39:23] Cap nhat file DanhSachSach.txt thanh cong.
+[13/11/2025 14:39:23] PHAT HIEN QUA HAN: Ngay tra du kien: 10/11/2025
+[13/11/2025 14:39:23] Ghi phieu muon thanh cong: 02/10/2025 - 10/11/2025
+[13/11/2025 14:39:23] === KET THUC CHUONG TRINH ===

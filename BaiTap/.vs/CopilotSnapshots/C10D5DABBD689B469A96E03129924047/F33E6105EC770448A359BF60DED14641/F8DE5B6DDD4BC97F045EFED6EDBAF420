@@ -1,0 +1,763 @@
+﻿# HƯỚNG DẪN LẬP TRÌNH QUẢN LÝ SÁCH - TEMPLATE
+
+## 📋 MỤC LỤC
+1. [Tổng quan hệ thống](#tổng-quan-hệ-thống)
+2. [Cấu trúc dữ liệu](#cấu-trúc-dữ-liệu)
+3. [Các chức năng chính](#các-chức-năng-chính)
+4. [Code template chi tiết](#code-template-chi-tiết)
+5. [Xử lý lỗi & Logging](#xử-lý-lỗi--logging)
+6. [Tips và Best Practices](#tips-và-best-practices)
+
+---
+
+## 🎯 TỔNG QUAN HỆ THỐNG
+
+### Chức năng chính:
+1. ✅ Đọc danh sách sách từ file
+2. ✅ Tìm kiếm theo tên sách hoặc tên độc giả
+3. ✅ Cho phép mượn sách (giảm số lượng)
+4. ✅ Kiểm tra quá hạn trả sách
+5. ✅ Ghi log mọi hoạt động
+6. ✅ Lưu phiếu mượn
+
+### File cần thiết:
+- **DanhSachSach.txt**: Lưu thông tin sách (TenSach,TenDocGia,SoLuong)
+- **PhieuMuon.txt**: Lưu lịch sử mượn sách
+- **log.txt**: Ghi log hoạt động (tự động tạo)
+
+---
+
+## 📊 CẤU TRÚC DỮ LIỆU
+
+### 1. Struct Sach
+```cpp
+struct Sach
+{
+    string tenSach;      // Tên sách
+    string tenDocGia;    // Tên độc giả mượn
+    int soLuongSach;     // Số lượng còn lại
+};
+```
+
+### 2. Struct PhieuMuon
+```cpp
+struct PhieuMuon
+{
+    string thoiGianMuon;  // Ngày mượn (dd/mm/yyyy)
+    string thoiGianTra;   // Ngày trả (dd/mm/yyyy)
+};
+```
+
+### 3. Khởi tạo dữ liệu
+```cpp
+int main()
+{
+    int dem = 0;              // Số sách thực tế (khởi tạo = 0)
+    int maxSach = 100;        // Số sách tối đa
+    Sach* dsSach = new Sach[maxSach];
+    PhieuMuon* dsPhieuMuon = new PhieuMuon;
+    
+    // ... xử lý ...
+    
+    // Giải phóng bộ nhớ
+    delete[] dsSach;
+    delete dsPhieuMuon;
+    dsSach = nullptr;
+    dsPhieuMuon = nullptr;
+}
+```
+
+**⚠️ LƯU Ý QUAN TRỌNG:**
+- `dem` PHẢI khởi tạo = 0, sẽ được cập nhật khi đọc file
+- Nếu khởi tạo `dem = 100` sẽ ghi 100 dòng rác vào file!
+
+---
+
+## 🔧 CÁC CHỨC NĂNG CHÍNH
+
+### 1. ĐỌC FILE (DocFileDanhSachSach)
+
+```cpp
+void DocFileDanhSachSach(Sach* dsSach, int& dem)
+{
+    try {
+        ifstream inFile("DanhSachSach.txt");
+        
+        // Fallback: tìm ở thư mục cha nếu không tìm thấy
+        if (!inFile.is_open())
+            inFile.open("../DanhSachSach.txt");
+            
+        if (!inFile.is_open())
+            throw runtime_error("Khong the mo file!");
+        
+        dem = 0;  // Reset counter
+        string line;
+        
+        while (getline(inFile, line))
+        {
+            // Parse dữ liệu: TenSach,TenDocGia,SoLuong
+            string tenSach = "", tenDocgia = "", soLuong = "";
+            int phan = 0;
+            
+            for (int i = 0; i < line.length(); i++)
+            {
+                if (line[i] == ',')
+                    phan++;
+                else {
+                    if (phan == 0) tenSach += line[i];
+                    else if (phan == 1) tenDocgia += line[i];
+                    else if (phan == 2) soLuong += line[i];
+                }
+            }
+            
+            dsSach[dem].tenSach = tenSach;
+            dsSach[dem].tenDocGia = tenDocgia;
+            
+            try {
+                dsSach[dem].soLuongSach = stoi(soLuong);
+            }
+            catch (exception& e) {
+                dsSach[dem].soLuongSach = 0;
+                GhiLog("Loi convert: " + tenSach);
+            }
+            
+            dem++;
+        }
+        
+        inFile.close();
+        GhiLog("Doc file thanh cong. So luong: " + IntToString(dem));
+    }
+    catch (exception& e) {
+        cout << "Loi: " << e.what() << endl;
+        GhiLog("Loi doc file: " + string(e.what()));
+    }
+}
+```
+
+**Pattern quan trọng:**
+- ✅ Try-catch bao quanh toàn bộ
+- ✅ Fallback tìm file ở nhiều vị trí
+- ✅ Parse CSV thủ công (không dùng getline với delimiter)
+- ✅ Ghi log cả thành công và thất bại
+
+---
+
+### 2. LỰA CHỌN MƯỢN SÁCH (LuaChon)
+
+#### 2.1. Tìm theo TÊN SÁCH
+
+```cpp
+if (luachon == "tensach")
+{
+    // Hiển thị tất cả sách
+    cout << "Danh sach sach:" << endl;
+    for (int i = 0; i < dem; i++)
+        cout << dsSach[i].tenSach << "," 
+             << dsSach[i].tenDocGia << "," 
+             << dsSach[i].soLuongSach << endl;
+    
+    // Cho user chọn
+    cout << "Chon ten sach: ";
+    cin >> tenSachChon;
+    tenSachDaChon = tenSachChon;  // Lưu lại để xử lý sau
+    
+    // Tìm số lượng của sách được chọn
+    for (int i = 0; i < dem; i++)
+    {
+        if (tenSachChon == dsSach[i].tenSach)
+        {
+            soluongsach = dsSach[i].soLuongSach;
+            break;
+        }
+    }
+    
+    // Validate số lượng mượn
+    do {
+        cout << "Chon so luong muon muon: ";
+        cin >> soluongchon;
+        if (soluongchon > soluongsach)
+            cout << "Nhap qua so luong! Nhap lai!" << endl;
+    } while (soluongchon > soluongsach);
+    
+    // Nhập thông tin mượn/trả
+    cout << "Nhap ngay muon (dd/mm/yyyy): ";
+    cin >> dsPhieuMuon->thoiGianMuon;
+    cout << "Nhap ngay tra (dd/mm/yyyy): ";
+    cin >> dsPhieuMuon->thoiGianTra;
+    
+    daluachon = true;
+    GhiLog("User chon: " + tenSachChon);
+}
+```
+
+#### 2.2. Tìm theo TÊN ĐỘC GIẢ
+
+```cpp
+else if (luachon == "docgia")
+{
+    // Hiển thị danh sách độc giả (không trùng lặp)
+    cout << "Danh sach doc gia:" << endl;
+    for (int i = 0; i < dem; i++)
+    {
+        bool daTonTai = false;
+        // Kiểm tra xem đã hiển thị chưa
+        for (int j = 0; j < i; j++)
+        {
+            if (dsSach[i].tenDocGia == dsSach[j].tenDocGia)
+            {
+                daTonTai = true;
+                break;
+            }
+        }
+        if (!daTonTai)
+            cout << dsSach[i].tenDocGia << endl;
+    }
+    
+    // Nhập tên độc giả
+    cout << "Nhap ten doc gia: ";
+    cin >> tenDocGiaChon;
+    
+    // Hiển thị sách của độc giả đó
+    cout << "Sach cua " << tenDocGiaChon << ":" << endl;
+    for (int i = 0; i < dem; i++)
+    {
+        if (tenDocGiaChon == dsSach[i].tenDocGia)
+            cout << dsSach[i].tenSach << "," 
+                 << dsSach[i].soLuongSach << endl;
+    }
+    
+    // Phần còn lại giống "tensach"
+    // ...
+}
+```
+
+**Pattern loại bỏ trùng lặp:**
+```cpp
+// Kiểm tra phần tử i có trùng với [0..i-1] không
+bool daTonTai = false;
+for (int j = 0; j < i; j++)
+{
+    if (array[i] == array[j])
+    {
+        daTonTai = true;
+        break;
+    }
+}
+if (!daTonTai)
+    cout << array[i] << endl;
+```
+
+---
+
+### 3. CẬP NHẬT SỐ LƯỢNG SÁCH (XuLySoLuongSach)
+
+```cpp
+void XuLySoLuongSach(Sach* dsSach, int dem, 
+                     string tenSachDaChon, 
+                     int soluongchon, 
+                     bool daluachon)
+{
+    if (daluachon)
+    {
+        // CHỈ giảm số lượng của sách được chọn
+        for (int i = 0; i < dem; i++)
+        {
+            if (dsSach[i].tenSach == tenSachDaChon)
+            {
+                dsSach[i].soLuongSach -= soluongchon;
+                GhiLog("Cap nhat: " + tenSachDaChon);
+                break;  // ← QUAN TRỌNG: Dừng sau khi tìm thấy
+            }
+        }
+    }
+    
+    // Ghi lại toàn bộ file (CHỈ ghi `dem` dòng)
+    try {
+        ofstream outFile("DanhSachSach.txt", ios::out);
+        if (!outFile.is_open())
+            throw runtime_error("Khong the ghi file!");
+        
+        for (int i = 0; i < dem; i++)  // ← ĐÚNG: Chỉ ghi dem dòng
+        {
+            outFile << dsSach[i].tenSach << "," 
+                    << dsSach[i].tenDocGia << "," 
+                    << dsSach[i].soLuongSach << endl;
+        }
+        outFile.close();
+        GhiLog("Cap nhat file thanh cong.");
+    }
+    catch (exception& e) {
+        GhiLog("Loi ghi file: " + string(e.what()));
+    }
+}
+```
+
+**⚠️ LỖI THƯỜNG GẶP:**
+```cpp
+// SAI: Giảm TẤT CẢ sách
+for (int i = 0; i < dem; i++)
+{
+    dsSach[i].soLuongSach -= soluongchon;  // ← SAI!
+}
+
+// ĐÚNG: Chỉ giảm sách được chọn
+for (int i = 0; i < dem; i++)
+{
+    if (dsSach[i].tenSach == tenSachDaChon)
+    {
+        dsSach[i].soLuongSach -= soluongchon;
+        break;  // ← Dừng ngay
+    }
+}
+```
+
+---
+
+### 4. KIỂM TRA QUÁ HẠN (TinhQuaHanPhieuMuon)
+
+```cpp
+void TinhQuaHanPhieuMuon(PhieuMuon* dsPhieuMuon)
+{
+    bool kiemtraquathoihan = false;
+    string thoigiantra = dsPhieuMuon->thoiGianTra;
+    
+    // Parse ngày trả: dd/mm/yyyy
+    string ngaytra = "", thangtra = "", namtra = "";
+    int phantra = 0;
+    
+    for (int i = 0; i < thoigiantra.length(); i++)
+    {
+        if (thoigiantra[i] == '/' || thoigiantra[i] == '-')
+            phantra++;
+        else {
+            if (phantra == 0) ngaytra += thoigiantra[i];
+            else if (phantra == 1) thangtra += thoigiantra[i];
+            else if (phantra == 2) namtra += thoigiantra[i];
+        }
+    }
+    
+    // Convert string → int
+    int intNgayTra = 0, intThangTra = 0, intNamTra = 0;
+    try {
+        intNgayTra = stoi(ngaytra);
+        intThangTra = stoi(thangtra);
+        intNamTra = stoi(namtra);
+    }
+    catch (exception& e) {
+        // Nếu lỗi, mặc định = 0
+        intNgayTra = intThangTra = intNamTra = 0;
+    }
+    
+    // Lấy ngày hiện tại
+    int ngayhientai, thanghientai, namhientai;
+    ThoiGianHienTai(ngayhientai, thanghientai, namhientai);
+    
+    // So sánh: Năm → Tháng → Ngày
+    if (intNamTra < namhientai)
+        kiemtraquathoihan = true;
+    else if (intNamTra == namhientai)
+    {
+        if (intThangTra < thanghientai)
+            kiemtraquathoihan = true;
+        else if (intThangTra == thanghientai)
+        {
+            if (intNgayTra < ngayhientai)
+                kiemtraquathoihan = true;
+        }
+    }
+    
+    // Kết quả
+    if (kiemtraquathoihan)
+    {
+        cout << "QUA HAN!" << endl;
+        GhiLog("PHAT HIEN QUA HAN: " + dsPhieuMuon->thoiGianTra);
+    }
+    else
+    {
+        cout << "Chua qua han" << endl;
+        GhiLog("Chua qua han: " + dsPhieuMuon->thoiGianTra);
+    }
+}
+```
+
+**Hàm lấy thời gian hiện tại:**
+```cpp
+void ThoiGianHienTai(int& ngay, int& thang, int& nam)
+{
+    time_t thoigianhientai = time(0);
+    tm* thoigianhientaidocduoc = localtime(&thoigianhientai);
+    
+    ngay = thoigianhientaidocduoc->tm_mday;
+    thang = thoigianhientaidocduoc->tm_mon + 1;      // +1 vì tháng bắt đầu từ 0
+    nam = thoigianhientaidocduoc->tm_year + 1900;    // +1900 vì năm tính từ 1900
+}
+```
+
+---
+
+### 5. GHI LOG (GhiLog)
+
+```cpp
+void GhiLog(string noidung)
+{
+    try {
+        ofstream logFile("log.txt", ios::app);  // Append mode
+        
+        if (!logFile.is_open())
+            throw runtime_error("Khong the mo log.txt!");
+        
+        // Tạo timestamp
+        time_t thoigianhientai = time(0);
+        tm* tm_ptr = localtime(&thoigianhientai);
+        
+        // Ghi: [dd/mm/yyyy hh:mm:ss] noidung
+        logFile << "[" << tm_ptr->tm_mday << "/" 
+                << (tm_ptr->tm_mon + 1) << "/" 
+                << (tm_ptr->tm_year + 1900) << " "
+                << tm_ptr->tm_hour << ":" 
+                << tm_ptr->tm_min << ":" 
+                << tm_ptr->tm_sec << "] " 
+                << noidung << endl;
+        
+        logFile.close();
+    }
+    catch (exception& e) {
+        cout << "Loi ghi log: " << e.what() << endl;
+    }
+}
+```
+
+**Vị trí gọi GhiLog:**
+1. ✅ Đầu/cuối chương trình
+2. ✅ Sau khi đọc file thành công/thất bại
+3. ✅ Khi user chọn mượn sách
+4. ✅ Khi cập nhật số lượng
+5. ✅ Khi phát hiện quá hạn
+6. ✅ Khi ghi phiếu mượn thành công
+
+---
+
+### 6. GHI PHIẾU MƯỢN (InFilePhieuMuon)
+
+```cpp
+void InFilePhieuMuon(PhieuMuon* dsPhieuMuon)
+{
+    try {
+        ofstream outFile("PhieuMuon.txt", ios::app);  // Append
+        
+        if (!outFile.is_open())
+            throw runtime_error("Khong the mo PhieuMuon.txt!");
+        
+        outFile << dsPhieuMuon->thoiGianMuon << " " 
+                << dsPhieuMuon->thoiGianTra << endl;
+        
+        outFile.close();
+        GhiLog("Ghi phieu muon thanh cong");
+    }
+    catch (exception& e) {
+        GhiLog("Loi ghi phieu muon: " + string(e.what()));
+    }
+}
+```
+
+---
+
+## ❗ XỬ LÝ LỖI & LOGGING
+
+### Pattern Try-Catch chuẩn:
+
+```cpp
+void Function()
+{
+    try {
+        // Code có thể lỗi
+        ifstream file("data.txt");
+        if (!file.is_open())
+            throw runtime_error("Khong mo duoc file!");
+        
+        // Xử lý...
+        
+        file.close();
+        GhiLog("Thanh cong");
+    }
+    catch (exception& e) {
+        cout << "Loi: " << e.what() << endl;
+        GhiLog("Loi: " + string(e.what()));
+    }
+}
+```
+
+### Tắt Warning C4996:
+
+```cpp
+#define _CRT_SECURE_NO_WARNINGS  // ← Dòng đầu tiên
+#include <iostream>
+// ... các include khác
+```
+
+---
+
+## 💡 TIPS VÀ BEST PRACTICES
+
+### 1. Quản lý bộ nhớ động
+
+```cpp
+// Khởi tạo
+Sach* dsSach = new Sach[100];
+
+// Sử dụng...
+
+// Giải phóng
+delete[] dsSach;  // ← Dùng delete[] cho mảng
+dsSach = nullptr; // ← Set null để tránh dangling pointer
+```
+
+### 2. Đọc input an toàn
+
+```cpp
+// Validation loop
+int soluong;
+do {
+    cout << "Nhap so luong: ";
+    cin >> soluong;
+    
+    if (soluong <= 0 || soluong > max)
+        cout << "Nhap lai!" << endl;
+        
+} while (soluong <= 0 || soluong > max);
+```
+
+### 3. Parse CSV thủ công
+
+```cpp
+string data = "item1,item2,item3";
+string parts[3];
+int index = 0;
+
+for (int i = 0; i < data.length(); i++)
+{
+    if (data[i] == ',')
+        index++;
+    else
+        parts[index] += data[i];
+}
+```
+
+### 4. Kiểm tra file tồn tại
+
+```cpp
+ifstream file("data.txt");
+
+// Cách 1: is_open()
+if (!file.is_open())
+    cout << "File khong ton tai!" << endl;
+
+// Cách 2: Fallback
+if (!file.is_open())
+    file.open("../data.txt");  // Thử thư mục cha
+```
+
+### 5. Format output đẹp
+
+```cpp
+cout << "========================================" << endl;
+cout << "  DANH SACH SACH" << endl;
+cout << "========================================" << endl;
+cout << left << setw(20) << "Ten Sach" 
+     << setw(15) << "Doc Gia" 
+     << "So Luong" << endl;
+cout << "----------------------------------------" << endl;
+```
+
+---
+
+## 🔄 LUỒNG CHƯƠNG TRÌNH
+
+```
+MAIN
+ ├─→ GhiLog("Bat dau")
+ ├─→ DocFileDanhSachSach()
+ │    ├─→ Mở file
+ │    ├─→ Parse từng dòng
+ │    ├─→ Lưu vào mảng
+ │    └─→ GhiLog("Doc file thanh cong")
+ │
+ ├─→ LuaChon()
+ │    ├─→ Hiển thị danh sách
+ │    ├─→ Nhận input user
+ │    ├─→ Validate
+ │    └─→ GhiLog("User chon...")
+ │
+ ├─→ XuLySoLuongSach()
+ │    ├─→ Giảm số lượng sách được chọn
+ │    ├─→ Ghi lại file
+ │    └─→ GhiLog("Cap nhat thanh cong")
+ │
+ ├─→ TinhQuaHanPhieuMuon()
+ │    ├─→ Parse ngày trả
+ │    ├─→ So sánh với ngày hiện tại
+ │    └─→ GhiLog("Qua han" hoặc "Chua qua han")
+ │
+ ├─→ InFilePhieuMuon()
+ │    ├─→ Ghi vào PhieuMuon.txt
+ │    └─→ GhiLog("Ghi phieu muon")
+ │
+ ├─→ Giải phóng bộ nhớ
+ └─→ GhiLog("Ket thuc")
+```
+
+---
+
+## 📝 TEMPLATE CODE ĐẦY ĐỦ
+
+### Header & Includes
+
+```cpp
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdexcept>
+#include <ctime>
+using namespace std;
+
+// Forward declarations
+void GhiLog(string noidung);
+```
+
+### Main Template
+
+```cpp
+int main()
+{
+    GhiLog("=== BAT DAU ===");
+    
+    // Biến điều khiển
+    string luachon;
+    int soluongchon = 0;
+    bool daluachon = false;
+    string tenItemDaChon = "";
+    
+    // Quản lý dữ liệu
+    int dem = 0;           // ← Khởi tạo = 0
+    int maxItems = 100;
+    Item* dsItems = new Item[maxItems];
+    
+    // Đọc file
+    DocFile(dsItems, dem);
+    
+    if (dem == 0)
+    {
+        cout << "Khong co du lieu!" << endl;
+        delete[] dsItems;
+        return 0;
+    }
+    
+    // Xử lý nghiệp vụ
+    LuaChon(dsItems, dem, luachon, soluongchon, daluachon, tenItemDaChon);
+    XuLy(dsItems, dem, tenItemDaChon, soluongchon, daluachon);
+    
+    // Giải phóng
+    delete[] dsItems;
+    dsItems = nullptr;
+    
+    GhiLog("=== KET THUC ===");
+    return 0;
+}
+```
+
+---
+
+## 🚨 CÁC LỖI THƯỜNG GẶP
+
+### 1. Khởi tạo `dem` sai
+
+```cpp
+// SAI
+int dem = 100;  // ← Sẽ ghi 100 dòng rác!
+
+// ĐÚNG
+int dem = 0;    // ← Sẽ được cập nhật khi đọc file
+```
+
+### 2. Giảm số lượng tất cả item
+
+```cpp
+// SAI
+for (int i = 0; i < dem; i++)
+    items[i].quantity--;  // Giảm TẤT CẢ
+
+// ĐÚNG
+for (int i = 0; i < dem; i++)
+{
+    if (items[i].name == selectedName)
+    {
+        items[i].quantity--;
+        break;  // ← Dừng ngay
+    }
+}
+```
+
+### 3. Quên tắt warning
+
+```cpp
+// Sẽ bị lỗi C4996 với localtime()
+#include <ctime>
+
+// Phải thêm dòng này TRƯỚC các include
+#define _CRT_SECURE_NO_WARNINGS
+#include <ctime>
+```
+
+### 4. File path sai
+
+```cpp
+// Chỉ tìm ở 1 nơi
+ifstream file("data.txt");
+
+// Nên có fallback
+ifstream file("data.txt");
+if (!file.is_open())
+    file.open("../data.txt");  // Thử thư mục khác
+```
+
+### 5. Parse ngày sai
+
+```cpp
+// Quên kiểm tra định dạng
+string date = "25/12/2024";
+int day = stoi(date.substr(0, 2));  // OK
+
+// Nhưng nếu user nhập "25-12-2024"?
+// → Cần parse động với '/' hoặc '-'
+```
+
+---
+
+## 📚 KẾT LUẬN
+
+Template này có thể áp dụng cho:
+- ✅ Quản lý sách thư viện
+- ✅ Quản lý sinh viên
+- ✅ Quản lý sản phẩm
+- ✅ Quản lý nhân viên
+- ✅ Bất kỳ hệ thống CRUD đơn giản nào
+
+**Các bước triển khai:**
+1. Định nghĩa struct phù hợp
+2. Implement hàm đọc/ghi file
+3. Implement nghiệp vụ cụ thể
+4. Thêm logging ở các điểm quan trọng
+5. Test kỹ với nhiều trường hợp
+
+**Remember:**
+- 🔥 Luôn khởi tạo `dem = 0`
+- 🔥 Ghi log mọi thứ
+- 🔥 Try-catch ở mọi I/O operation
+- 🔥 Validate input từ user
+- 🔥 Giải phóng bộ nhớ động
+
+---
+
+*Last updated: 2024*
+*Author: Based on Library Management System*

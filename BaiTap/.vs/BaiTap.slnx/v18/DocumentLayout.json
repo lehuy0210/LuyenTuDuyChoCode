@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ASUS\\Desktop\\GitHub\\LuyenTuDuyChoCode\\BaiTap\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ASUS\\Desktop\\GitHub\\LuyenTuDuyChoCode\\BaiTap\\Bai1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bai1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ASUS\\Desktop\\GitHub\\LuyenTuDuyChoCode\\BaiTap\\Debug\\DanhSachSach.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Debug\\DanhSachSach.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\HuongDanLapTrinhQuanLySach.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\AnhXaCodeSangCongThuc.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\GiaoTrinhQuanLyDuLieu.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GiaoTrinhQuanLyDuLieu.md",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\GiaoTrinhQuanLyDuLieu.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\GiaoTrinhQuanLyDuLieu.md",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\GiaoTrinhQuanLyDuLieu.md",
+              "RelativeToolTip": "..\\..\\..\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\GiaoTrinhQuanLyDuLieu.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-11-13T08:12:39.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AnhXaCodeSangCongThuc.md",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\AnhXaCodeSangCongThuc.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\AnhXaCodeSangCongThuc.md",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\AnhXaCodeSangCongThuc.md",
+              "RelativeToolTip": "..\\..\\..\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\AnhXaCodeSangCongThuc.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-11-13T08:01:33.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HuongDanLapTrinhQuanLySach.md",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\HuongDanLapTrinhQuanLySach.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\HuongDanLapTrinhQuanLySach.md",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\HuongDanLapTrinhQuanLySach.md",
+              "RelativeToolTip": "..\\..\\..\\L\u00FD Thuy\u1EBFt L\u1EADp Tr\u00ECnh\\HuongDanLapTrinhQuanLySach.md",
+              "ViewState": "AgIAAB0CAAAAAAAAAABRwCACAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-11-13T07:44:22.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DanhSachSach.txt",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\GitHub\\LuyenTuDuyChoCode\\BaiTap\\Debug\\DanhSachSach.txt",
+              "RelativeDocumentMoniker": "Debug\\DanhSachSach.txt",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\GitHub\\LuyenTuDuyChoCode\\BaiTap\\Debug\\DanhSachSach.txt",
+              "RelativeToolTip": "Debug\\DanhSachSach.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-11-13T07:34:43.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Bai1.cpp",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\GitHub\\LuyenTuDuyChoCode\\BaiTap\\Bai1.cpp",
+              "RelativeDocumentMoniker": "Bai1.cpp",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\GitHub\\LuyenTuDuyChoCode\\BaiTap\\Bai1.cpp",
+              "RelativeToolTip": "Bai1.cpp",
+              "ViewState": "AgIAALwAAAAAAAAAAAAYwNAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-13T06:34:08.661Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

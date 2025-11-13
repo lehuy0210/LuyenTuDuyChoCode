@@ -1,0 +1,544 @@
+﻿# CÔNG THỨC LẬP TRÌNH QUẢN LÝ DỮ LIỆU
+
+> **Tài liệu tra cứu nhanh - Template & Patterns**
+
+---
+
+## 📐 CÔNG THỨC CƠ BẢN
+
+### Công thức 1: Khởi tạo mảng động
+```cpp
+// PATTERN:
+int dem = 0;                    // ← BẮT BUỘC = 0
+int maxSize = 100;
+Type* array = new Type[maxSize];
+
+// SỬ DỤNG...
+
+delete[] array;
+array = nullptr;
+```
+**⚠️ LƯU Ý:** `dem = 0` là BẮT BUỘC, nếu khởi tạo = maxSize sẽ ghi rác!
+
+---
+
+### Công thức 2: Đọc file CSV
+```cpp
+// PATTERN:
+ifstream file("data.txt");
+if (!file.is_open())
+    file.open("../data.txt");  // Fallback
+
+dem = 0;
+string line;
+while (getline(file, line)) {
+    // Parse: field1,field2,field3
+    string f1="", f2="", f3="";
+    int part = 0;
+    
+    for (char c : line) {
+        if (c == ',') part++;
+        else {
+            if (part == 0) f1 += c;
+            else if (part == 1) f2 += c;
+            else if (part == 2) f3 += c;
+        }
+    }
+    
+    array[dem].field1 = f1;
+    array[dem].field2 = f2;
+    array[dem].field3 = stoi(f3);  // Convert nếu cần
+    dem++;
+}
+file.close();
+```
+
+---
+
+### Công thức 3: Loại bỏ trùng lặp
+```cpp
+// PATTERN: Hiển thị unique values
+for (int i = 0; i < n; i++) {
+    bool exist = false;
+    for (int j = 0; j < i; j++) {
+        if (array[i].field == array[j].field) {
+            exist = true;
+            break;
+        }
+    }
+    if (!exist)
+        cout << array[i].field << endl;
+}
+```
+
+---
+
+### Công thức 4: Tìm và cập nhật 1 phần tử
+```cpp
+// PATTERN: Update CHỈ 1 item
+for (int i = 0; i < n; i++) {
+    if (array[i].id == targetId) {
+        array[i].value -= amount;  // Hoặc +=, =
+        break;  // ← BẮT BUỘC
+    }
+}
+```
+
+---
+
+### Công thức 5: Ghi file (overwrite)
+```cpp
+// PATTERN:
+ofstream file("data.txt", ios::out);
+
+for (int i = 0; i < dem; i++) {  // ← Chỉ ghi `dem` dòng
+    file << array[i].f1 << "," 
+         << array[i].f2 << "," 
+         << array[i].f3 << endl;
+}
+
+file.close();
+```
+
+---
+
+### Công thức 6: Parse ngày (dd/mm/yyyy)
+```cpp
+// PATTERN:
+void ParseDate(string date, int& d, int& m, int& y) {
+    string sd="", sm="", sy="";
+    int part = 0;
+    
+    for (char c : date) {
+        if (c == '/' || c == '-') part++;
+        else {
+            if (part == 0) sd += c;
+            else if (part == 1) sm += c;
+            else if (part == 2) sy += c;
+        }
+    }
+    
+    d = stoi(sd);
+    m = stoi(sm);
+    y = stoi(sy);
+}
+```
+
+---
+
+### Công thức 7: So sánh ngày
+```cpp
+// PATTERN: date1 < date2?
+bool IsEarlier(int d1, int m1, int y1,
+               int d2, int m2, int y2) {
+    if (y1 < y2) return true;
+    if (y1 == y2) {
+        if (m1 < m2) return true;
+        if (m1 == m2 && d1 < d2) return true;
+    }
+    return false;
+}
+```
+
+---
+
+### Công thức 8: Lấy ngày hiện tại
+```cpp
+// PATTERN:
+void GetCurrentDate(int& d, int& m, int& y) {
+    time_t now = time(0);
+    tm* t = localtime(&now);
+    
+    d = t->tm_mday;
+    m = t->tm_mon + 1;      // +1 vì tháng bắt đầu từ 0
+    y = t->tm_year + 1900;  // +1900 vì năm tính từ 1900
+}
+```
+
+---
+
+### Công thức 9: Ghi log với timestamp
+```cpp
+// PATTERN:
+void Log(string msg) {
+    ofstream file("log.txt", ios::app);  // Append mode
+    
+    time_t now = time(0);
+    tm* t = localtime(&now);
+    
+    file << "[" << t->tm_mday << "/" 
+         << (t->tm_mon + 1) << "/" 
+         << (t->tm_year + 1900) << " "
+         << t->tm_hour << ":" 
+         << t->tm_min << ":" 
+         << t->tm_sec << "] " 
+         << msg << endl;
+    
+    file.close();
+}
+```
+
+---
+
+### Công thức 10: Validate input
+```cpp
+// PATTERN:
+int value;
+do {
+    cout << "Nhap (min-max): ";
+    cin >> value;
+    
+    if (value < min || value > max)
+        cout << "Khong hop le!" << endl;
+        
+} while (value < min || value > max);
+```
+
+---
+
+## 📊 CÔNG THỨC NÂNG CAO
+
+### Công thức 11: Try-Catch chuẩn
+```cpp
+// PATTERN:
+try {
+    // Code có thể lỗi
+    ifstream file("data.txt");
+    if (!file.is_open())
+        throw runtime_error("Khong mo duoc file!");
+    
+    // Xử lý...
+    
+    file.close();
+    Log("Thanh cong");
+}
+catch (exception& e) {
+    cout << "Loi: " << e.what() << endl;
+    Log("Loi: " + string(e.what()));
+}
+```
+
+---
+
+### Công thức 12: Main template
+```cpp
+// PATTERN:
+int main() {
+    Log("=== START ===");
+    
+    // 1. Khai báo
+    int dem = 0;
+    int maxSize = 100;
+    Type* array = new Type[maxSize];
+    Transaction* trans = new Transaction;
+    
+    // 2. Đọc dữ liệu
+    ReadFile(array, dem);
+    if (dem == 0) {
+        cout << "Khong co du lieu!" << endl;
+        delete[] array;
+        delete trans;
+        return 0;
+    }
+    
+    // 3. Xử lý nghiệp vụ
+    string selected;
+    int value;
+    bool done = false;
+    
+    Search(array, dem, selected);
+    Update(array, dem, selected, value);
+    Validate(trans);
+    SaveResult(trans);
+    
+    // 4. Giải phóng
+    delete[] array;
+    delete trans;
+    array = nullptr;
+    trans = nullptr;
+    
+    Log("=== END ===");
+    return 0;
+}
+```
+
+---
+
+## 🎯 ĐỊNH NGHĨA STRUCT
+
+### Template 1: Đối tượng chính
+```cpp
+struct Entity {
+    string id;          // Mã định danh
+    string name;        // Tên
+    string category;    // Loại/Phân loại
+    string owner;       // Người sở hữu
+    int quantity;       // Số lượng/Giá trị
+    string status;      // Trạng thái
+};
+```
+
+### Template 2: Giao dịch
+```cpp
+struct Transaction {
+    string startDate;   // Ngày bắt đầu
+    string endDate;     // Ngày kết thúc
+    string person;      // Người thực hiện
+    string note;        // Ghi chú
+};
+```
+
+---
+
+## 🔢 BẢNG QUY ĐỔI
+
+### CSV Delimiters
+| Ký tự | Mô tả | Code |
+|-------|-------|------|
+| `,` | Comma | `if (c == ',')` |
+| `;` | Semicolon | `if (c == ';')` |
+| `\|` | Pipe | `if (c == '\|')` |
+| `\t` | Tab | `if (c == '\t')` |
+
+### Time struct members
+| Field | Giá trị | Công thức |
+|-------|---------|-----------|
+| `tm_mday` | 1-31 | `ngay = t->tm_mday` |
+| `tm_mon` | 0-11 | `thang = t->tm_mon + 1` |
+| `tm_year` | Từ 1900 | `nam = t->tm_year + 1900` |
+| `tm_hour` | 0-23 | `gio = t->tm_hour` |
+| `tm_min` | 0-59 | `phut = t->tm_min` |
+| `tm_sec` | 0-59 | `giay = t->tm_sec` |
+
+---
+
+## ⚠️ CÔNG THỨC LỖI THƯỜNG GẶP
+
+### Lỗi 1: Khởi tạo counter sai
+```cpp
+// SAI:
+int dem = 100;  // Sẽ ghi 100 dòng rác!
+
+// ĐÚNG:
+int dem = 0;    // Sẽ được cập nhật khi đọc file
+```
+
+### Lỗi 2: Cập nhật tất cả thay vì 1
+```cpp
+// SAI:
+for (int i = 0; i < n; i++)
+    array[i].value--;  // Giảm TẤT CẢ!
+
+// ĐÚNG:
+for (int i = 0; i < n; i++) {
+    if (array[i].id == target) {
+        array[i].value--;
+        break;  // ← BẮT BUỘC
+    }
+}
+```
+
+### Lỗi 3: Ghi file với maxSize
+```cpp
+// SAI:
+for (int i = 0; i < maxSize; i++)  // Ghi 100 dòng!
+    file << array[i].data;
+
+// ĐÚNG:
+for (int i = 0; i < dem; i++)      // Chỉ ghi dòng thật
+    file << array[i].data;
+```
+
+### Lỗi 4: Quên fallback tìm file
+```cpp
+// SAI:
+ifstream file("data.txt");
+if (!file.is_open())
+    throw error("Loi!");  // Dừng ngay!
+
+// ĐÚNG:
+ifstream file("data.txt");
+if (!file.is_open())
+    file.open("../data.txt");  // Thử vị trí khác
+if (!file.is_open())
+    throw error("Loi!");       // Mới throw
+```
+
+### Lỗi 5: Convert string không try-catch
+```cpp
+// SAI:
+int num = stoi(str);  // Crash nếu str không phải số!
+
+// ĐÚNG:
+try {
+    int num = stoi(str);
+}
+catch (...) {
+    int num = 0;  // Default value
+}
+```
+
+---
+
+## 📋 CHECKLIST
+
+### Trước khi code:
+- [ ] Định nghĩa struct phù hợp
+- [ ] Xác định các field cần thiết
+- [ ] Vẽ luồng xử lý
+
+### Khi code:
+- [ ] `dem = 0` khi khởi tạo
+- [ ] Fallback khi mở file
+- [ ] Try-catch cho I/O và convert
+- [ ] `break` sau khi tìm thấy
+- [ ] Ghi log đầy đủ
+
+### Sau khi code:
+- [ ] Test với file rỗng
+- [ ] Test với dữ liệu lỗi
+- [ ] Test với input invalid
+- [ ] Kiểm tra memory leak
+- [ ] Review log file
+
+---
+
+## 🔧 CÔNG THỨC NHANH
+
+### Convert int → string (không dùng to_string)
+```cpp
+string IntToStr(int n) {
+    if (n == 0) return "0";
+    string s = "";
+    bool neg = n < 0;
+    if (neg) n = -n;
+    
+    while (n > 0) {
+        s = char('0' + n % 10) + s;
+        n /= 10;
+    }
+    
+    return neg ? "-" + s : s;
+}
+```
+
+### Tìm index của phần tử
+```cpp
+int FindIndex(Type* arr, int n, string id) {
+    for (int i = 0; i < n; i++)
+        if (arr[i].id == id)
+            return i;
+    return -1;
+}
+```
+
+### Đếm số lượng match
+```cpp
+int Count(Type* arr, int n, string field, string value) {
+    int count = 0;
+    for (int i = 0; i < n; i++)
+        if (arr[i].field == value)
+            count++;
+    return count;
+}
+```
+
+### Swap 2 phần tử
+```cpp
+void Swap(Type& a, Type& b) {
+    Type temp = a;
+    a = b;
+    b = temp;
+}
+```
+
+---
+
+## 📖 BẢNG TRA NHANH
+
+### File modes
+| Mode | Ý nghĩa | Code |
+|------|---------|------|
+| Read | Đọc | `ifstream file("x.txt")` |
+| Write (overwrite) | Ghi đè | `ofstream file("x.txt", ios::out)` |
+| Append | Ghi thêm | `ofstream file("x.txt", ios::app)` |
+
+### Include headers
+```cpp
+#define _CRT_SECURE_NO_WARNINGS  // Tắt warning
+#include <iostream>              // cout, cin
+#include <fstream>               // ifstream, ofstream
+#include <string>                // string
+#include <stdexcept>             // runtime_error
+#include <ctime>                 // time, localtime
+using namespace std;
+```
+
+---
+
+## 🎓 VÍ DỤ ỨNG DỤNG
+
+### Ứng dụng 1: Quản lý Sách
+```cpp
+struct Sach {
+    string maSach;      // id
+    string tenSach;     // name
+    string theLoai;     // category
+    string docGia;      // owner
+    int soLuong;        // quantity
+    string tinhTrang;   // status
+};
+```
+
+### Ứng dụng 2: Quản lý Sinh viên
+```cpp
+struct SinhVien {
+    string maSV;        // id
+    string hoTen;       // name
+    string nganh;       // category
+    string giangVien;   // owner
+    int diem;           // quantity
+    string xepLoai;     // status
+};
+```
+
+### Ứng dụng 3: Quản lý Kho
+```cpp
+struct SanPham {
+    string maSP;        // id
+    string tenSP;       // name
+    string danhMuc;     // category
+    string nhaCungCap;  // owner
+    int soLuongKho;     // quantity
+    string trangThai;   // status
+};
+```
+
+---
+
+## 💾 FORMAT FILE
+
+### data.txt (CSV)
+```
+ID001,Ten1,LoaiA,Nguoi1,100,Active
+ID002,Ten2,LoaiB,Nguoi2,50,Inactive
+ID003,Ten3,LoaiA,Nguoi1,75,Active
+```
+
+### transaction.txt
+```
+01/01/2024 31/01/2024 NguoiA GhiChu1
+02/01/2024 28/02/2024 NguoiB GhiChu2
+```
+
+### log.txt (auto-generated)
+```
+[15/1/2025 10:30:45] Doc file thanh cong
+[15/1/2025 10:31:12] User chon: ID001
+[15/1/2025 10:31:30] Cap nhat thanh cong
+```
+
+---
+
+*Tài liệu công thức lập trình - Phiên bản 2025*
+*Áp dụng cho: Quản lý Sách, Sinh viên, Kho hàng, và các bài tương tự*
