@@ -1,0 +1,4 @@
+MaKH,HoTen,SDT,DiaChi
+KH001,Nguyen Van A,0912345678,123 Nguyen Trai Q.1
+KH002,Tran Thi B,0923456789,456 Le Loi Q.3
+KH003,Le Van C,0934567890,789 Tran Hung Dao Q.5

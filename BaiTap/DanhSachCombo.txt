@@ -1,0 +1,6 @@
+MaCombo,TenCombo,GiaCombo
+CB001,Bap Nuoc,50000
+CB002,Bap Nuoc Lon,70000
+CB003,Combo Doi,120000
+CB004,Combo Gia Dinh,200000
+CB005,Nuoc Ngot,30000
