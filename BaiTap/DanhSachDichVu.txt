@@ -1,0 +1,9 @@
+MaDV,TenDichVu,DonGia,MoTa
+DV001,XetNghiemMau,150000,Xet nghiem co ban
+DV002,XetNghiemNuocTieu,100000,Xet nghiem tieu duong
+DV003,SieuAm,300000,Sieu am khong dau
+DV004,XQuang,250000,Chup X-quang
+DV005,ChupCT,800000,Chup CT Scan
+DV006,NoiSoi,500000,Noi soi da day
+DV007,DieuTri,200000,Dieu tri cap cuu
+DV008,Tiem,50000,Tiem thuoc

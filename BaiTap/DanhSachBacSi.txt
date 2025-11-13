@@ -1,0 +1,6 @@
+MaBS,HoTen,ChuyenKhoa,SoPhongKham,LichLamViec
+BS001,BS.NguyenVanA,NhiKhoa,P101,8h-12h,14h-17h
+BS002,BS.TranThiB,TimMach,P102,8h-12h,14h-18h
+BS003,BS.LeVanC,TieuHoa,P103,8h-12h
+BS004,BS.PhamThiD,DaLieu,P104,14h-18h
+BS005,BS.HoangVanE,ThanKinh,P105,8h-12h,14h-18h
