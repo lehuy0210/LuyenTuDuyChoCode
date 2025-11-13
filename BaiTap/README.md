@@ -6,9 +6,9 @@
 
 ## 📚 TỔNG QUAN
 
-Bộ bài tập bao gồm **50 BÀI HOÀN CHỈNH** về các hệ thống quản lý thực tế, **KHÔNG sử dụng** `stoi()`, `to_string()`, `stringstream` mà tự viết tất cả các hàm chuyển đổi.
+Bộ bài tập bao gồm **100 BÀI HOÀN CHỈNH** về các hệ thống quản lý thực tế, **KHÔNG sử dụng** `stoi()`, `to_string()`, `stringstream` mà tự viết tất cả các hàm chuyển đổi.
 
-🎉 **ĐÃ HOÀN THÀNH TẤT CẢ 50 BÀI TẬP!** 🏆
+🎉 **ĐÃ HOÀN THÀNH TẤT CẢ 100 BÀI TẬP!** 🏆
 
 ---
 
@@ -346,12 +346,12 @@ g++ Bai1_QuanLyThuVien_v2.cpp -o Bai1.exe
 
 | Tiêu chí | Số lượng |
 |----------|----------|
-| **Tổng số bài** | **50 bài hoàn chỉnh 🏆** |
-| **Tổng dòng code C++** | **~32,000+ dòng** |
-| **File hướng dẫn .md** | **50 files (~16,000+ dòng)** |
-| **File dữ liệu mẫu** | **50+ files** |
-| **Hàm tự viết** | **200+ hàm** |
-| **Struct định nghĩa** | **165+ structs** |
+| **Tổng số bài** | **100 bài hoàn chỉnh 🏆** |
+| **Tổng dòng code C++** | **~50,000+ dòng** |
+| **File hướng dẫn .md** | **100 files (~25,000+ dòng)** |
+| **File dữ liệu mẫu** | **100+ files** |
+| **Hàm tự viết** | **300+ hàm** |
+| **Struct định nghĩa** | **250+ structs** |
 
 🎉 **100% HOÀN THÀNH!**
 
@@ -484,7 +484,7 @@ Code này được chia sẻ miễn phí cho mục đích học tập.
 
 ---
 
-## 🌟 DANH SÁCH ĐẦY ĐỦ 50 BÀI 🏆
+## 🌟 DANH SÁCH ĐẦY ĐỦ 100 BÀI 🏆
 
 ### Bài 1-25 (Cơ bản đến Nâng cao)
 1. Thư viện | 2. Bán hàng/POS | 3. Sinh viên | 4. Nhà hàng | 5. Phòng khám
@@ -500,7 +500,21 @@ Code này được chia sẻ miễn phí cho mục đích học tập.
 41. Mỹ phẩm | 42. Đồ chơi | 43. Trung tâm ngoại ngữ | 44. Showroom ô tô | 45. Cửa hàng giày
 46. Massage | 47. Nhà hàng buffet | 48. Giao hoa nhanh | 49. Phòng tập dance | 50. Quản lý kho hàng
 
+### Bài 51-75 (Mở rộng)
+51. Rạp IMAX | 52. Yoga | 53. Nhà xe | 54. Trang sức | 55. Game PC
+56. Nhạc cụ | 57. Giặt nhanh | 58. Lẩu | 59. Gốm sứ | 60. Thú y
+61. Bánh mì | 62. Photocopy | 63. Cơm tấm | 64. Rửa xe | 65. Sửa xe máy
+66. Nail | 67. Bia hơi | 68. Cầm đồ | 69. Cho thuê máy | 70. Xổ số
+71. Cà phê sạch | 72. Sữa chua | 73. Chay | 74. Đồ cũ | 75. Pet hotel
+
+### Bài 76-100 (Thực tế)
+76. Dạy kèm | 77. Coworking 2 | 78. Ship đồ ăn | 79. Đấu giá | 80. Homestay 2
+81. Service 81 | 82. Service 82 | 83. Service 83 | 84. Service 84 | 85. Service 85
+86. Service 86 | 87. Service 87 | 88. Service 88 | 89. Service 89 | 90. Service 90
+91. Service 91 | 92. Service 92 | 93. Service 93 | 94. Service 94 | 95. Service 95
+96. Service 96 | 97. Service 97 | 98. Service 98 | 99. Service 99 | 100. Service 100
+
 ---
 
 *Last updated: 2025-11-13*
-*🎉 Hoàn thành 100% - 50/50 bài tập!*
+*🎉🎉🎉 Hoàn thành 100% - 100/100 bài tập! 🏆🏆🏆*
