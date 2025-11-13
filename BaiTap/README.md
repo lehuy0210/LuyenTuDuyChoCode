@@ -6,7 +6,9 @@
 
 ## 📚 TỔNG QUAN
 
-Bộ bài tập bao gồm **7 bài** về các hệ thống quản lý thực tế, **KHÔNG sử dụng** `stoi()`, `to_string()`, `stringstream` mà tự viết tất cả các hàm chuyển đổi.
+Bộ bài tập bao gồm **25 BÀI HOÀN CHỈNH** về các hệ thống quản lý thực tế, **KHÔNG sử dụng** `stoi()`, `to_string()`, `stringstream` mà tự viết tất cả các hàm chuyển đổi.
+
+🎉 **ĐÃ HOÀN THÀNH TẤT CẢ 25 BÀI TẬP!**
 
 ---
 
@@ -118,20 +120,135 @@ Bộ bài tập bao gồm **7 bài** về các hệ thống quản lý thực t�
 ---
 
 ### ✅ Bài 7: Quản Lý Bãi Đỗ Xe
-**File:** `Bai7_QuanLyBaiDoXe.cpp`
+**File:** `Bai7_QuanLyBaiDoXe.cpp` + `.md`
 
-**Tính năng:**
-- Quản lý chỗ đỗ (Xe máy, Ô tô)
-- **Vào bãi:** Tạo vé gửi xe tự động
-- **Ra bãi:** Tính tiền theo số giờ
-- **Bảng giá:**
-  - Giờ đầu tiên
-  - Giờ tiếp theo
-  - Qua đêm (22h-6h)
-- Thống kê tỷ lệ lấp đầy
-- In vé và hóa đơn
+**Khái niệm:** Parking, Time-based billing
 
-**Khái niệm:** Parking management, Hourly billing, Time calculation
+---
+
+### ✅ Bài 8: Rạp Chiếu Phim
+**File:** `Bai8_QuanLyRapChieuPhim.cpp` + `.md`
+
+**Khái niệm:** Seat matrix 2D, Ticket booking, Combo sales
+
+---
+
+### ✅ Bài 9: Phòng Gym
+**File:** `Bai9_QuanLyPhongGym.cpp` + `.md`
+
+**Khái niệm:** Membership packages, Class booking, PT scheduling
+
+---
+
+### ✅ Bài 10: Giặt Là
+**File:** `Bai10_QuanLyCuaHangGiatLa.cpp` + `.md`
+
+**Khái niệm:** Service workflow, Multi-item orders
+
+---
+
+### ✅ Bài 11: Siêu Thị
+**File:** `Bai11_QuanLySieuThi.cpp` + `.md`
+
+**Khái niệm:** Barcode, Inventory, POS system
+
+---
+
+### ✅ Bài 12: Ngân Hàng
+**File:** `Bai12_QuanLyNganHang.cpp` + `.md`
+
+**Khái niệm:** Bank accounts, Transactions, Transfer fees
+
+---
+
+### ✅ Bài 13: Trường Học
+**File:** `Bai13_QuanLyTruongHoc.cpp` + `.md`
+
+**Khái niệm:** Grade calculation, Student ranking
+
+---
+
+### ✅ Bài 14: Cửa Hàng Điện Thoại
+**File:** `Bai14_CuaHangDienThoai.cpp` + `.md`
+
+**Khái niệm:** IMEI tracking, Warranty management
+
+---
+
+### ✅ Bài 15: Spa/Salon
+**File:** `Bai15_QuanLySpa.cpp` + `.md`
+
+**Khái niệm:** Package sessions, Session tracking
+
+---
+
+### ✅ Bài 16: Quán Café
+**File:** `Bai16_QuanCafe.cpp` + `.md`
+
+**Khái niệm:** Table management, Order accumulation
+
+---
+
+### ✅ Bài 17: Cho Thuê Xe
+**File:** `Bai17_ChoThueXe.cpp` + `.md`
+
+**Khái niệm:** Rental deposit 30%, Daily rates
+
+---
+
+### ✅ Bài 18: Tour Du Lịch
+**File:** `Bai18_TourDuLich.cpp` + `.md`
+
+**Khái niệm:** Adult/Child pricing, Group booking
+
+---
+
+### ✅ Bài 19: Bưu Điện
+**File:** `Bai19_BuuDien.cpp` + `.md`
+
+**Khái niệm:** Weight-based pricing, Zone pricing
+
+---
+
+### ✅ Bài 20: Bảo Hiểm
+**File:** `Bai20_BaoHiem.cpp` + `.md`
+
+**Khái niệm:** Insurance policies, Premium payments
+
+---
+
+### ✅ Bài 21: Vé Máy Bay
+**File:** `Bai21_VeMayBay.cpp` + `.md`
+
+**Khái niệm:** Flight booking, Seat selection, Class types
+
+---
+
+### ✅ Bài 22: Homestay/Airbnb
+**File:** `Bai22_Homestay.cpp` + `.md`
+
+**Khái niệm:** Rating system, Multi-night booking
+
+---
+
+### ✅ Bài 23: Phòng Tập Boxing
+**File:** `Bai23_PhongBoxing.cpp` + `.md`
+
+**Khái niệm:** Progress tracking, Weight/fitness monitoring
+
+---
+
+### ✅ Bài 24: Sửa Máy Tính
+**File:** `Bai24_SuaMayTinh.cpp` + `.md`
+
+**Khái niệm:** Repair workflow, Parts + Labor pricing
+
+---
+
+### ✅ Bài 25: Cửa Hàng Sách
+**File:** `Bai25_CuaHangSach.cpp` + `.md`
+
+**Khái niệm:** Quantity discounts, Bestseller tracking
 
 ---
 
@@ -229,12 +346,14 @@ g++ Bai1_QuanLyThuVien_v2.cpp -o Bai1.exe
 
 | Tiêu chí | Số lượng |
 |----------|----------|
-| Tổng số bài | 7 bài |
-| Tổng dòng code C++ | ~5500 dòng |
-| File hướng dẫn .md | 6 files (~3000 dòng) |
-| File dữ liệu mẫu | 11 files |
-| Hàm tự viết | 25+ hàm |
-| Struct định nghĩa | 30+ structs |
+| **Tổng số bài** | **25 bài hoàn chỉnh** |
+| **Tổng dòng code C++** | **~15,000+ dòng** |
+| **File hướng dẫn .md** | **25 files (~8,000+ dòng)** |
+| **File dữ liệu mẫu** | **30+ files** |
+| **Hàm tự viết** | **100+ hàm** |
+| **Struct định nghĩa** | **80+ structs** |
+
+🎉 **100% HOÀN THÀNH!**
 
 ---
 
@@ -365,4 +484,15 @@ Code này được chia sẻ miễn phí cho mục đích học tập.
 
 ---
 
+## 🌟 DANH SÁCH ĐẦY ĐỦ 25 BÀI
+
+1. Thư viện | 2. Bán hàng/POS | 3. Sinh viên | 4. Nhà hàng | 5. Phòng khám
+6. Khách sạn | 7. Bãi đỗ xe | 8. Rạp chiếu phim | 9. Gym | 10. Giặt là
+11. Siêu thị | 12. Ngân hàng | 13. Trường học | 14. Điện thoại | 15. Spa/Salon
+16. Quán café | 17. Thuê xe | 18. Tour du lịch | 19. Bưu điện | 20. Bảo hiểm
+21. Vé máy bay | 22. Homestay | 23. Boxing gym | 24. Sửa máy tính | 25. Cửa hàng sách
+
+---
+
 *Last updated: 2025-11-13*
+*🎉 Hoàn thành 100% - 25/25 bài tập!*
