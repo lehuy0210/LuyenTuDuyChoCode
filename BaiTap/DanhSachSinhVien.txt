@@ -1,0 +1,11 @@
+MaSV,HoTen,Lop,DiemTB
+SV001,Nguyen Van An,CNTT1,8.5
+SV002,Tran Thi Binh,CNTT1,7.2
+SV003,Le Van Cuong,CNTT2,9.0
+SV004,Pham Thi Dung,CNTT2,6.8
+SV005,Hoang Van Em,KTPM1,5.5
+SV006,Nguyen Thi Fen,KTPM1,8.0
+SV007,Tran Van Giang,KTPM2,7.5
+SV008,Le Thi Huong,KHMT1,9.2
+SV009,Pham Van Inh,KHMT1,6.0
+SV010,Hoang Thi Khanh,KHMT2,8.8

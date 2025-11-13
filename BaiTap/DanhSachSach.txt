@@ -1,3 +1,6 @@
-LapTrinhC++,NguyenVanA,10
-CauTrucDuLieu,TranThiB,5
-CoSoDuLieu,LeVanC,8
+ISBN,TenSach,TacGia,SoLuong
+978-1234567890,LapTrinhC++,NguyenVanA,10
+978-1234567891,CauTrucDuLieu,TranVanB,5
+978-1234567892,GiaiThuat,LeThiC,8
+978-1234567893,CosoDuLieu,PhamVanD,12
+978-1234567894,MangMayTinh,HoangThiE,6

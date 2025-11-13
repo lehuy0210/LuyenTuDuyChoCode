@@ -1,0 +1,6 @@
+MaGoi,TenGoi,SoThang,GiaGoi,MoTa
+G001,1 Thang,1,500000,Tap tap gym + Yoga co ban
+G002,3 Thang,3,1200000,Tap tap gym + Yoga + 2 buoi PT
+G003,6 Thang,6,2000000,Tap tap gym + Yoga + Zumba + 5 buoi PT
+G004,1 Nam,12,3500000,Tap tat ca lop hoc + 10 buoi PT + Thu do mien phi
+G005,VIP,12,8000000,Unlimited + PT khong gioi han + Thu do + Nuoc mien phi

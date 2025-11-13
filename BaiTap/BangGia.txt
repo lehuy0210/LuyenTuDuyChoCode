@@ -1,0 +1,3 @@
+LoaiXe,GiaGio1,GiaGioTiep,GiaQuaDem
+XeMay,5000,3000,10000
+OTo,10000,5000,20000

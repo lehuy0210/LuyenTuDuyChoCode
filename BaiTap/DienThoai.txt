@@ -1,0 +1,5 @@
+MaSP,TenSP,HangSX,GiaBan,TonKho
+DT001,iPhone 15 Pro Max,Apple,30000000,10
+DT002,Samsung Galaxy S24,Samsung,25000000,15
+DT003,Xiaomi 14,Xiaomi,15000000,20
+DT004,OPPO Reno11,OPPO,12000000,18

@@ -1,0 +1,4 @@
+SoPhong,SoHangGhe,SoGheMoiHang
+1,10,12
+2,8,10
+3,12,15

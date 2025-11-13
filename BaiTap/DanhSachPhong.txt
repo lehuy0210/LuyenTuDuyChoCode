@@ -1,0 +1,11 @@
+MaPhong,LoaiPhong,SoGiuong,GiaPhong,TrangThai,MoTa
+101,Standard,1,500000,Trong,PhongDon-ViewThanhPho
+102,Standard,1,500000,Trong,PhongDon-ViewThanhPho
+103,Standard,2,700000,Trong,PhongDoi-ViewThanhPho
+104,Deluxe,2,1000000,Trong,PhongVIP-ViewBien
+105,Deluxe,2,1000000,DaDat,PhongVIP-ViewBien
+201,Standard,1,500000,Trong,PhongDon-ViewThanhPho
+202,Deluxe,2,1000000,Trong,PhongVIP-ViewBien
+203,Suite,3,1500000,Trong,PhongHangSang-ViewBien
+204,Suite,3,1500000,DangO,PhongHangSang-ViewBien
+301,Deluxe,2,1000000,Trong,PhongVIP-ViewBien
