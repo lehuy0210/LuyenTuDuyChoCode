@@ -6,9 +6,9 @@
 
 ## 📚 TỔNG QUAN
 
-Bộ bài tập bao gồm **45 BÀI HOÀN CHỈNH** về các hệ thống quản lý thực tế, **KHÔNG sử dụng** `stoi()`, `to_string()`, `stringstream` mà tự viết tất cả các hàm chuyển đổi.
+Bộ bài tập bao gồm **50 BÀI HOÀN CHỈNH** về các hệ thống quản lý thực tế, **KHÔNG sử dụng** `stoi()`, `to_string()`, `stringstream` mà tự viết tất cả các hàm chuyển đổi.
 
-🎉 **ĐÃ HOÀN THÀNH TẤT CẢ 45 BÀI TẬP!**
+🎉 **ĐÃ HOÀN THÀNH TẤT CẢ 50 BÀI TẬP!** 🏆
 
 ---
 
@@ -346,12 +346,12 @@ g++ Bai1_QuanLyThuVien_v2.cpp -o Bai1.exe
 
 | Tiêu chí | Số lượng |
 |----------|----------|
-| **Tổng số bài** | **45 bài hoàn chỉnh** |
-| **Tổng dòng code C++** | **~30,000+ dòng** |
-| **File hướng dẫn .md** | **45 files (~15,000+ dòng)** |
+| **Tổng số bài** | **50 bài hoàn chỉnh 🏆** |
+| **Tổng dòng code C++** | **~32,000+ dòng** |
+| **File hướng dẫn .md** | **50 files (~16,000+ dòng)** |
 | **File dữ liệu mẫu** | **50+ files** |
-| **Hàm tự viết** | **180+ hàm** |
-| **Struct định nghĩa** | **150+ structs** |
+| **Hàm tự viết** | **200+ hàm** |
+| **Struct định nghĩa** | **165+ structs** |
 
 🎉 **100% HOÀN THÀNH!**
 
@@ -484,7 +484,7 @@ Code này được chia sẻ miễn phí cho mục đích học tập.
 
 ---
 
-## 🌟 DANH SÁCH ĐẦY ĐỦ 45 BÀI
+## 🌟 DANH SÁCH ĐẦY ĐỦ 50 BÀI 🏆
 
 ### Bài 1-25 (Cơ bản đến Nâng cao)
 1. Thư viện | 2. Bán hàng/POS | 3. Sinh viên | 4. Nhà hàng | 5. Phòng khám
@@ -493,13 +493,14 @@ Code này được chia sẻ miễn phí cho mục đích học tập.
 16. Quán café | 17. Thuê xe | 18. Tour du lịch | 19. Bưu điện | 20. Bảo hiểm
 21. Vé máy bay | 22. Homestay | 23. Boxing gym | 24. Sửa máy tính | 25. Cửa hàng sách
 
-### Bài 26-45 (Nâng cao)
+### Bài 26-50 (Nâng cao)
 26. Bệnh viện | 27. Thú cưng | 28. Karaoke | 29. Shop quần áo | 30. Taxi
 31. Chung cư | 32. Điện máy | 33. Nhà thuốc | 34. Shop hoa | 35. Studio ảnh
 36. Co-working space | 37. Tiệm vàng | 38. Bowling | 39. Cửa hàng bánh | 40. Quán trà sữa
 41. Mỹ phẩm | 42. Đồ chơi | 43. Trung tâm ngoại ngữ | 44. Showroom ô tô | 45. Cửa hàng giày
+46. Massage | 47. Nhà hàng buffet | 48. Giao hoa nhanh | 49. Phòng tập dance | 50. Quản lý kho hàng
 
 ---
 
 *Last updated: 2025-11-13*
-*🎉 Hoàn thành 100% - 45/45 bài tập!*
+*🎉 Hoàn thành 100% - 50/50 bài tập!*
