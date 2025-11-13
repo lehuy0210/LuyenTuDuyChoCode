@@ -1,0 +1,9 @@
+MaSP,MaVach,TenSP,DanhMuc,GiaBan,TonKho,NguongCanhBao
+SP001,8934567890123,Sua tuoi Vinamilk,Thuc pham,12000,50,10
+SP002,8934567890124,Banh mi sandwich,Thuc pham,15000,30,10
+SP003,8934567890125,Coca Cola 330ml,Do uong,10000,100,20
+SP004,8934567890126,Nuoc suoi Lavie,Do uong,5000,200,30
+SP005,8934567890127,Mi Hao Hao tom chua cay,Thuc pham,5000,150,50
+SP006,8934567890128,Xa phong OMO,Gia dung,45000,40,10
+SP007,8934567890129,Dau goi Clear,Gia dung,85000,25,5
+SP008,8934567890130,Kem danh rang PS,Gia dung,28000,60,15
