@@ -1,0 +1,36 @@
+# BÀI 130: QUAN LY TRUNG TAM MASSAGE
+
+## 📚 Mô tả
+Hệ thống quản lý bài 130.
+
+## 🎯 Tính năng
+- Quản lý sản phẩm
+- Tạo hóa đơn
+- Tính tổng tiền
+
+## 📊 Struct
+```cpp
+struct Product {
+    string id;
+    string name;
+    float price;
+    int stock;
+};
+
+struct Bill {
+    string billId;
+    string customerName;
+    float total;
+};
+```
+
+## 🚀 Cách chạy
+```bash
+g++ Bai130_QuanLyTrungTamMassage.cpp -o Bai130
+./Bai130
+```
+
+## 💡 Kiến thức
+- Product management
+- Billing system
+- Inventory tracking
