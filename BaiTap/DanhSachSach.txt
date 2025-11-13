@@ -1,3 +1,5 @@
-LapTrinhC++,NguyenVanA,10
-CauTrucDuLieu,TranThiB,5
-CoSoDuLieu,LeVanC,8
+Lap Trinh C++,10
+Cau Truc Du Lieu,5
+Co So Du Lieu,8
+Thuat Toan,12
+Lap Trinh Python,7
