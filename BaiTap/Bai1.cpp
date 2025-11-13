@@ -2,9 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <sstream>
 #include <stdexcept>
 #include <ctime>
+#include <cstdio>
 using namespace std;
 
 // Constants
@@ -16,6 +16,16 @@ const int MAX_YEAR = 2100;
 
 // Forward declarations
 void GhiLog(string noidung);
+
+// ==================== UTILITY HELPER ====================
+
+// Chuyen doi so nguyen sang string (thay the to_string)
+string IntToString(int num)
+{
+	char buffer[50];
+	sprintf(buffer, "%d", num);
+	return string(buffer);
+}
 
 // ==================== STRUCTURES ====================
 struct Sach
@@ -48,7 +58,7 @@ bool KiemTraChuoiRong(const string& str)
 {
 	if (str.empty())
 		return true;
-	for (size_t i = 0; i < str.length(); i++)
+	for (int i = 0; i < (int)str.length(); i++)
 	{
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 			return false;
@@ -62,7 +72,7 @@ bool TachNgayThang(const string& chuoiNgay, NgayThang& nt)
 	string ngay = "", thang = "", nam = "";
 	int phan = 0;
 
-	for (size_t i = 0; i < chuoiNgay.length(); i++)
+	for (int i = 0; i < (int)chuoiNgay.length(); i++)
 	{
 		if (chuoiNgay[i] == '/' || chuoiNgay[i] == '-')
 		{
@@ -207,11 +217,11 @@ string XoaKhoangTrangThua(const string& str)
 	if (str.empty())
 		return str;
 
-	size_t dau = 0;
-	size_t cuoi = str.length() - 1;
+	int dau = 0;
+	int cuoi = (int)str.length() - 1;
 
 	// Xoa khoang trang o dau
-	while (dau < str.length() && (str[dau] == ' ' || str[dau] == '\t'))
+	while (dau < (int)str.length() && (str[dau] == ' ' || str[dau] == '\t'))
 		dau++;
 
 	// Xoa khoang trang o cuoi
@@ -223,7 +233,7 @@ string XoaKhoangTrangThua(const string& str)
 
 // ==================== FILE OPERATIONS ====================
 
-// Doc file danh sach sach
+// Doc file danh sach sach (parse CSV thu cong)
 void DocFileDanhSachSach(Sach* dsSach, int& dem)
 {
 	try
@@ -252,22 +262,28 @@ void DocFileDanhSachSach(Sach* dsSach, int& dem)
 			if (KiemTraChuoiRong(line))
 				continue; // Bo qua dong rong
 
-			// Parse CSV su dung stringstream
-			stringstream ss(line);
-			string tenSach, soLuongStr;
+			// Parse CSV thu cong
+			string tenSach = "";
+			string soLuongStr = "";
+			int phan = 0;
 
-			// Doc ten sach (truoc dau phay)
-			if (!getline(ss, tenSach, ','))
+			for (int i = 0; i < (int)line.length(); i++)
 			{
-				GhiLog("Loi dinh dang dong " + to_string(soDong) + ": " + line);
-				continue;
-			}
-
-			// Doc so luong (sau dau phay)
-			if (!getline(ss, soLuongStr))
-			{
-				GhiLog("Loi dinh dang dong " + to_string(soDong) + ": thieu so luong");
-				continue;
+				if (line[i] == ',')
+				{
+					phan++;
+				}
+				else
+				{
+					if (phan == 0)
+					{
+						tenSach += line[i];
+					}
+					else if (phan == 1)
+					{
+						soLuongStr += line[i];
+					}
+				}
 			}
 
 			// Xoa khoang trang thua
@@ -277,7 +293,14 @@ void DocFileDanhSachSach(Sach* dsSach, int& dem)
 			// Kiem tra ten sach rong
 			if (tenSach.empty())
 			{
-				GhiLog("Loi dong " + to_string(soDong) + ": ten sach rong");
+				GhiLog("Loi dong " + IntToString(soDong) + ": ten sach rong");
+				continue;
+			}
+
+			// Kiem tra so luong rong
+			if (soLuongStr.empty())
+			{
+				GhiLog("Loi dong " + IntToString(soDong) + ": thieu so luong");
 				continue;
 			}
 
@@ -288,13 +311,13 @@ void DocFileDanhSachSach(Sach* dsSach, int& dem)
 				soLuong = stoi(soLuongStr);
 				if (soLuong < 0)
 				{
-					GhiLog("Loi dong " + to_string(soDong) + ": so luong am - " + tenSach);
+					GhiLog("Loi dong " + IntToString(soDong) + ": so luong am - " + tenSach);
 					soLuong = 0;
 				}
 			}
 			catch (...)
 			{
-				GhiLog("Loi chuyen doi so luong cho dong " + to_string(soDong) + ": " + tenSach);
+				GhiLog("Loi chuyen doi so luong cho dong " + IntToString(soDong) + ": " + tenSach);
 				soLuong = 0;
 			}
 
@@ -309,10 +332,10 @@ void DocFileDanhSachSach(Sach* dsSach, int& dem)
 
 		if (dem >= MAX_SACH)
 		{
-			GhiLog("CANH BAO: Da dat gioi han toi da " + to_string(MAX_SACH) + " sach!");
+			GhiLog("CANH BAO: Da dat gioi han toi da " + IntToString(MAX_SACH) + " sach!");
 		}
 
-		GhiLog("Doc file DanhSachSach.txt thanh cong. Tong: " + to_string(dem) + " sach.");
+		GhiLog("Doc file DanhSachSach.txt thanh cong. Tong: " + IntToString(dem) + " sach.");
 	}
 	catch (exception& e)
 	{
@@ -388,7 +411,7 @@ void HienThiDanhSachSach(Sach* dsSach, int dem)
 		cout << (i + 1) << "   | " << dsSach[i].tenSach;
 
 		// Them khoang trang cho dep
-		for (int j = dsSach[i].tenSach.length(); j < 28; j++)
+		for (int j = (int)dsSach[i].tenSach.length(); j < 28; j++)
 			cout << " ";
 
 		cout << " | " << dsSach[i].soLuongConLai << endl;
@@ -552,7 +575,7 @@ void MuonTheoTenSach(Sach* dsSach, int dem, PhieuMuon* phieuMuon, bool& thanhCon
 	dsSach[viTri].soLuongConLai -= soLuongMuon;
 
 	cout << "\nMuon sach thanh cong!" << endl;
-	GhiLog("Muon sach thanh cong: " + tenSach + " (" + to_string(soLuongMuon) + " quyen) - " + tenDocGia);
+	GhiLog("Muon sach thanh cong: " + tenSach + " (" + IntToString(soLuongMuon) + " quyen) - " + tenDocGia);
 	thanhCong = true;
 }
 
