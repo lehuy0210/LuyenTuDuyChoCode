@@ -1,0 +1,7 @@
+MaDV,TenDV,DonVi,DonGia,MoTa
+DV001,Giat Thuong,kg,20000,Giat thuong voi nuoc va bot giat
+DV002,Giat Kho,cai,50000,Giat kho cho do cao cap
+DV003,Ui,cai,15000,Ui phang do
+DV004,Giat + Ui,kg,30000,Gom ca giat va ui
+DV005,Giat Rem Man,cai,100000,Giat rem cua man nuoc
+DV006,Giat Chan Ga Goi,bo,80000,Giat bo chan ga goi nem

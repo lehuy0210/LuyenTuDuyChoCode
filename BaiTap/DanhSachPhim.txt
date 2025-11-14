@@ -1,0 +1,8 @@
+MaPhim,TenPhim,TheLoai,ThoiLuong,DanhGia
+P001,Avengers: Endgame,Hanh dong,181,8.5
+P002,Doraemon: Nobita va Mat Trang,Hoat hinh,111,7.8
+P003,Mat Biec,Tinh cam,117,7.2
+P004,Parasite,Tam ly,132,8.9
+P005,The Batman,Hanh dong,176,8.3
+P006,Coco,Hoat hinh,105,8.7
+P007,Bo Gia,Gia dinh,128,7.5

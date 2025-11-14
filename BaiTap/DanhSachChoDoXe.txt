@@ -1,0 +1,11 @@
+SoCho,LoaiXe,TrangThai,BienSo
+1,XeMay,Trong,
+2,XeMay,Trong,
+3,XeMay,Trong,
+4,XeMay,Trong,
+5,XeMay,Trong,
+6,OTo,Trong,
+7,OTo,Trong,
+8,OTo,Trong,
+9,XeMay,Trong,
+10,XeMay,Trong,

@@ -1,0 +1,6 @@
+MaLop,TenLop,GiangVien,NgayHoc,GioHoc,SoChoToiDa,SoChoDaDangKy,PhiThamGia
+L001,Yoga Morning,Tran Thi Hoa,16/01/2025,06:00,20,5,0
+L002,Zumba Dance,Nguyen Van Nam,16/01/2025,18:30,30,12,50000
+L003,Boxing Fitness,Le Thanh Tung,17/01/2025,19:00,15,8,100000
+L004,Yoga Evening,Tran Thi Hoa,17/01/2025,20:00,20,10,0
+L005,Spinning Class,Pham Van Duc,18/01/2025,07:00,25,15,50000

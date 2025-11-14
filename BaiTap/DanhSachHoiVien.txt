@@ -1,0 +1,4 @@
+MaHV,HoTen,Tuoi,SDT,Email,MaGoi,NgayDangKy,NgayHetHan,TrangThai
+HV001,Nguyen Van A,25,0912345678,a@example.com,G001,01/01/2025,01/02/2025,HoatDong
+HV002,Tran Thi B,30,0923456789,b@example.com,G003,15/12/2024,15/06/2025,HoatDong
+HV003,Le Van C,22,0934567890,c@example.com,G004,01/01/2025,01/01/2026,HoatDong

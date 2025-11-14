@@ -1,0 +1,11 @@
+SoBan,SoChoNgoi,TrangThai
+1,2,Trong
+2,2,Trong
+3,4,Trong
+4,4,Trong
+5,6,Trong
+6,6,Trong
+7,8,Trong
+8,4,Trong
+9,2,Trong
+10,4,Trong

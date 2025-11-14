@@ -1,0 +1,16 @@
+MaMonAn,TenMonAn,Loai,DonGia,ConMon
+KV001,GoiCuon,KhaiVi,35000,1
+KV002,NemRan,KhaiVi,45000,1
+KV003,SalataTron,KhaiVi,40000,1
+MC001,ComGa,MonChinh,55000,1
+MC002,Pho,MonChinh,50000,1
+MC003,BunBo,MonChinh,55000,1
+MC004,MiXao,MonChinh,60000,1
+MC005,CaKho,MonChinh,75000,1
+TM001,CheChuoi,TrangMieng,25000,1
+TM002,YaourtDau,TrangMieng,20000,1
+TM003,RauCau,TrangMieng,15000,1
+NU001,TraDa,NuocUong,10000,1
+NU002,CaPhe,NuocUong,25000,1
+NU003,NuocCam,NuocUong,30000,1
+NU004,Sinh,NuocUong,35000,1
